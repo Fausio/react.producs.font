@@ -1,21 +1,20 @@
-function Form({ hideFormBtnsProp }) {
+function Form({ hideFormBtnsProp, onInputsChange }) {
 
-    const myStyle = {
-        button: {
-            "margin": "1px"
-        },
-        input: {
-            "margin": "1px"
-        }
-
-    }
+    /*  const myStyle = {
+         button: {
+             "margin": "1px"
+         },
+         input: {
+             "margin": "1px"
+         }
+ 
+     } */
 
     return (
         <div>
             <form >
-                <input className="form-control" type="text" placeholder="Name" />
-
-                <input className="form-control" type="text" placeholder="Brand" />
+                <input onChange={onInputsChange} name="name" className="form-control" type="text" placeholder="Name" />
+                <input onChange={onInputsChange} name="brand" className="form-control" type="text" placeholder="Brand" />
 
 
                 {
