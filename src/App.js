@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import './App.css';
 import Form from './component/Form'
 import Table from './component/Table'
 
 function App() {
+
+const [hideFormBtns,setHideFormBtns] = useState(true);
+
   return (
     <div>
-      <Form />
+      <Form hideFormBtnsProp={hideFormBtns} />
       <Table />
     </div>
   );

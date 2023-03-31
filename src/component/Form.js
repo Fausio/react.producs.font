@@ -1,4 +1,4 @@
-function Form() {
+function Form({ hideFormBtnsProp }) {
 
     const myStyle = {
         button: {
@@ -13,15 +13,24 @@ function Form() {
     return (
         <div>
             <form >
-                <input className="form-control"   type="text" placeholder="Name" />
-                
-                <input className="form-control"  type="text" placeholder="Brand" />
-             
+                <input className="form-control" type="text" placeholder="Name" />
 
-                <input className="btn btn-primary"   type="button" value="Create" />
-                <input className="btn btn-warning"   type="button" value="Update" />
-                <input className="btn btn-danger"   type="button" value="Delete" />
-                <input className="btn btn-secondary"  type="button" value="Cancel" />
+                <input className="form-control" type="text" placeholder="Brand" />
+
+
+                {
+                    hideFormBtnsProp
+                        ?
+                        <input className="btn btn-primary" type="button" value="Create" />
+                        :
+                        <div>
+                            <input className="btn btn-warning" type="button" value="Update" />
+                            <input className="btn btn-danger" type="button" value="Delete" />
+                            <input className="btn btn-secondary" type="button" value="Cancel" />
+                        </div>
+                }
+
+
             </form>
         </div>
     );
