@@ -58,7 +58,7 @@ function App() {
   return (
     <div>
 
-      <p>{JSON.stringify(productObj)}</p>
+    
 
       <Form hideFormBtnsProp={hideFormBtns} onInputsChange={inputsChange} postProduct={createProduct} />
       <Table listeItems={product} />
