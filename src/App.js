@@ -30,12 +30,28 @@ function App() {
   }
 
   //
-  const [ productObj, seproductObj] = useState(productDTO);
+  const [productObj, seproductObj] = useState(productDTO);
 
   // handle event
   const inputsChange = (e) => {
-    
+
     seproductObj({ ...productObj, [e.target.name]: e.target.value });
+  }
+
+
+  // save product
+  const createProduct = () => {
+
+    fetch("http://localhost:8080/product/create", {
+      method: 'post',
+      body: JSON.stringify(productObj),
+      headers: { 'content-type': 'application/json', 'Accept': 'application/json' }
+    }).then(response_promesses => response_promesses.json())
+      .then(response_promesses_converted => {
+
+        
+
+      })
   }
 
 
@@ -44,7 +60,7 @@ function App() {
 
       <p>{JSON.stringify(productObj)}</p>
 
-      <Form hideFormBtnsProp={hideFormBtns} onInputsChange={inputsChange} />
+      <Form hideFormBtnsProp={hideFormBtns} onInputsChange={inputsChange} postProduct={createProduct} />
       <Table listeItems={product} />
     </div>
   );

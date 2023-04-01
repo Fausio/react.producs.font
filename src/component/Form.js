@@ -1,4 +1,4 @@
-function Form({ hideFormBtnsProp, onInputsChange }) {
+function Form({ hideFormBtnsProp, onInputsChange,postProduct }) {
 
     /*  const myStyle = {
          button: {
@@ -20,7 +20,7 @@ function Form({ hideFormBtnsProp, onInputsChange }) {
                 {
                     hideFormBtnsProp
                         ?
-                        <input className="btn btn-primary" type="button" value="Create" />
+                        <input className="btn btn-primary" type="button" value="Create"  onClick={postProduct}/>
                         :
                         <div>
                             <input className="btn btn-warning" type="button" value="Update" />
