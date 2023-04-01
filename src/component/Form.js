@@ -1,4 +1,4 @@
-function Form({ hideFormBtnsProp, onInputsChange,postProduct }) {
+function Form({ hideFormBtnsProp, onInputsChange,postProduct,obj  , onCancelselectElement,onDeleteSelectElement,onUpdateProduct }) {
 
     /*  const myStyle = {
          button: {
@@ -13,8 +13,8 @@ function Form({ hideFormBtnsProp, onInputsChange,postProduct }) {
     return (
         <div>
             <form >
-                <input onChange={onInputsChange} name="name" className="form-control" type="text" placeholder="Name" />
-                <input onChange={onInputsChange} name="brand" className="form-control" type="text" placeholder="Brand" />
+                <input onChange={onInputsChange} value={obj.name} name="name" className="form-control" type="text" placeholder="Name" />
+                <input onChange={onInputsChange} value={obj.brand} name="brand" className="form-control" type="text" placeholder="Brand" />
 
 
                 {
@@ -23,9 +23,9 @@ function Form({ hideFormBtnsProp, onInputsChange,postProduct }) {
                         <input className="btn btn-primary" type="button" value="Create"  onClick={postProduct}/>
                         :
                         <div>
-                            <input className="btn btn-warning" type="button" value="Update" />
-                            <input className="btn btn-danger" type="button" value="Delete" />
-                            <input className="btn btn-secondary" type="button" value="Cancel" />
+                            <input onClick={onUpdateProduct}   className="btn btn-warning" type="button" value="Update" />
+                            <input onClick={onDeleteSelectElement} className="btn btn-danger" type="button" value="Delete" />
+                            <input onClick={onCancelselectElement} className="btn btn-secondary" type="button" value="Cancel" />
                         </div>
                 }
 

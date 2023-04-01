@@ -21,6 +21,10 @@ function App() {
 
   }, []);
 
+  // read items 
+  /*   const readProducts = () => {
+ 
+   } */
 
   // obj
   const productDTO = {
@@ -39,6 +43,7 @@ function App() {
   }
 
 
+
   // save product
   const createProduct = () => {
 
@@ -49,26 +54,115 @@ function App() {
     }).then(response_promesses => response_promesses.json())
       .then(response_promesses_converted => {
 
-        console.log(response_promesses_converted)
-      
+    
+
         if (response_promesses_converted.msg != null) {
           alert('Erro: ' + response_promesses_converted.msg)
         } else {
-          SetProducts([...product,response_promesses_converted]);
-          alert('Success: Prodcut created')
+          SetProducts([...product, response_promesses_converted]);
+          alert('Success: Product created');
+          cleanModel();
+        }
+
+      })
+  }
+
+  const updateProduct = () => {
+
+
+ 
+    fetch("http://localhost:8080/product/update", {
+      method: 'put',
+      body: JSON.stringify(productObj),
+      headers: { 'content-type': 'application/json', 'Accept': 'application/json' }
+    }).then(response_promesses => response_promesses.json())
+      .then(response_promesses_converted => {
+
+        
+
+        if (response_promesses_converted.msg != null) {
+          alert('Erro: ' + response_promesses_converted.msg)
+        } else {
+        
+          
+          alert('Success: Product updated');
+          let vector = [...product];
+          let index = vector.findIndex((i) => {
+            return i.id === productObj.id
+          });
+  
+          vector[index] = productObj ;
+          SetProducts(vector);
+
+          cleanModel();
         }
 
       })
   }
 
 
+  // clean model 
+  const cleanModel = () => {
+
+    seproductObj(productDTO)
+
+  }
+
+  // select product on click
+  const selectElement = (index) => {
+
+    seproductObj(product[index]) 
+    setHideFormBtns(false);
+  }
+
+  // delete selected 
+  const onDeleteSelectElement = () => {
+    fetch("http://localhost:8080/product/delete/" + productObj.id, {
+      method: 'delete',
+      headers: { 'content-type': 'application/json', 'Accept': 'application/json' }
+    }).then(response_promesses => response_promesses.json())
+      .then(response_promesses_converted => {
+
+
+        alert('Success:' + response_promesses_converted.msg);
+
+
+        let vector = [...product];
+        let index = vector.findIndex((i) => {
+          return i.id === productObj.id
+        });
+
+        vector.splice(index, 1);
+        SetProducts(vector);
+
+
+        cleanModel();
+
+      })
+  }
+  // cancel select
+  const cancelselectElement = () => {
+    setHideFormBtns(true);
+    cleanModel();
+  }
+
+
   return (
     <div>
 
-    
 
-      <Form hideFormBtnsProp={hideFormBtns} onInputsChange={inputsChange} postProduct={createProduct} />
-      <Table listeItems={product} />
+
+      <Form hideFormBtnsProp={hideFormBtns}
+        onInputsChange={inputsChange}
+        postProduct={createProduct}
+        obj={productObj}
+        onCancelselectElement={cancelselectElement}
+        onUpdateProduct={updateProduct}
+        onDeleteSelectElement={onDeleteSelectElement} />
+
+
+      <Table listeItems={product} onSelectElement={selectElement} />
+
     </div>
   );
 }

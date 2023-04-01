@@ -1,4 +1,4 @@
-function Table({ listeItems }) {
+function Table({ listeItems, onSelectElement }) {
     return (
         <div className="container">
             <table className="table" border={1}>
@@ -20,7 +20,7 @@ function Table({ listeItems }) {
                                 <td>{obj.name}</td>
                                 <td>{obj.brand}</td>
                                 <td>
-                                    <button type="buttoon" className="btn btn-primary btn-sm"> Select </button>
+                                    <button type="buttoon" onClick={()=>{onSelectElement(index)}} className="btn btn-primary btn-sm"> Select </button>
                                 </td>
                             </tr>
                         )
