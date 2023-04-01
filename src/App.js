@@ -49,7 +49,14 @@ function App() {
     }).then(response_promesses => response_promesses.json())
       .then(response_promesses_converted => {
 
-        
+        console.log(response_promesses_converted)
+      
+        if (response_promesses_converted.msg != null) {
+          alert('Erro: ' + response_promesses_converted.msg)
+        } else {
+          SetProducts([...product,response_promesses_converted]);
+          alert('Success: Prodcut created')
+        }
 
       })
   }
